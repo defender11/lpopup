@@ -7,21 +7,10 @@
     </head>
     <body>
 
-        <a href="javascript:void(0);" data-lpopup="">Показать окно</a>
+        <a href="javascript:void(0);" class="show">Показать окно</a>
 
-        <!-- POPUP -->
-        <div class="b-lpopup">
-            <div class="b-lpopup-overflow-close"></div>
-            <div class="b-lpopup__content">
-                <div class="b-lcontent__header">
-                    <div class="b-lheader__title">Заголовок</div>
-                    <div class="b-lheader__close">X</div>
-                </div>
-                <div class="b-lpopup__body">
-                </div>
-                <div class="b-lpopup__footer">
-                </div>
-            </div>
+        <div class="content">
+            Test COntet
         </div>
 
 
@@ -30,13 +19,16 @@
         <script>
             if (window.jQuery) {
                 $(function () {
+
                     /**
                      * Настройки и логика popup окна
                      *
                      * @type {{callbackOpen: callbackOpen, callbackClose: callbackClose, callbackSave: callbackSave}}
                      */
                     var popUpParam = {
-                        closeBtn: true,
+                        closeBtn: false,
+                        target: '.show',
+                        targetContent: '.content',
                         // При открытии окна
                         callbackOpen: function(param) {
                             /**
@@ -45,27 +37,7 @@
                              * @param: this_o, self, main
                              * */
 
-                                // Получим поля popup окна
-                            var $main = param.main;
-                            var $header = $main.find('.b-popup__header .b-header__title');
-                            var $btnAdd = $main.find('.b-popup__footer .b-btns__add');
-
-
-                            // пример рабочий
-                            if (param.self.data('popup') === 'add') {
-                                // console.log('--callbackOpen: TYPE[add]');
-
-                                $header.text('Добавить услугу');
-                                $btnAdd.text('Добавить');
-                            }
-
-                            if (param.self.data('popup') === 'edit') {
-                                // console.log('--callbackOpen: TYPE[edit]');
-
-                                $header.text('Изменить услугу');
-                                $btnAdd.text('Изменить');
-
-                            }
+                            console.log('--callbackOpen');
                         },
 
                         // При закрытии окна
@@ -76,17 +48,7 @@
                              * @param: this_o, openBtn, main
                              * */
 
-
-                            // Тестовый код
-                            if (param.openBtn.data('popup') === 'add') {
-                                // console.log('--callbackClose: TYPE[add]');
-
-                            }
-
-                            if (param.openBtn.data('popup') === 'edit') {
-                                // console.log('--callbackClose: TYPE[edit]');
-
-                            }
+                            console.log('--callbackClose');
                         },
 
                         // При сохранении или добавлении
@@ -97,26 +59,7 @@
                              * @param: this_o, openBtn, main
                              * */
 
-                                // Получим поля popup окна
-                            var $main = param.main;
-                            var $header = $main.find('.b-popup__header .b-header__title');
-
-
-                            // пример рабочий
-                            if (param.openBtn.data('popup') === 'add') {
-                                // console.log('--callbackSave: TYPE[add]');
-
-
-                            }
-
-                            if (param.openBtn.data('popup') === 'edit') {
-                                // console.log('--callbackSave: TYPE[edit]');
-
-                                //Кнопка редактирования на которую нажали
-                                var $btnEdit = param.openBtn;
-
-
-                            }
+                            console.log('--callbackClose');
                         }
                     };
 

@@ -49,12 +49,35 @@ if (window.jQuery) {
         }
 
         var defaults = {
-                isNeedTemplate: false
+                closeBtn: false,
+                target: '.show',
+                targetContent: '.content',
             },
             options;
 
         var template = {
-
+            get: function (userBodyContentBlock) {
+                return "<!-- POPUP -->\n" +
+                        "<div class=\"b-lpopup\">\n" +
+                            "<div class=\"b-lpopup-overflow-close\"></div>\n" +
+                            "<div class=\"b-lpopup__content\">\n" +
+                                "<div class=\"b-lpopup__header\">\n" +
+                                    "<div class=\"b-lheader__title\">\n" +
+                                        "<div class=\"b-ltitle__text\">Заголовок</div>\n" +
+                                        "<div class=\"b-ltitle__sub-text\">Под заголовок</div>\n" +
+                                    "</div>\n" +
+                                    "<div class=\"b-lheader__close\">X</div>\n" +
+                                "</div>\n" +
+                                "<div class=\"b-lpopup__body\">\n" +
+                                    userBodyContentBlock +
+                                "</div>\n" +
+                                "<div class=\"b-lpopup__footer\">\n" +
+                                    "<a href=\"javascript:void(0);\">Отмена</a>\n" +
+                                    "<a href=\"javascript:void(0);\">Отправить</a>\n" +
+                                "</div>\n" +
+                            "</div>\n" +
+                        "</div>";
+            }
         };
 
         /**
@@ -70,7 +93,7 @@ if (window.jQuery) {
              * @param param
              */
             init: function (param) {
-                var $main = $('.b-popup');
+                var $main = $('.b-lpopup');
 
                 var $headerBtnClose = $main.find('.b-header__close');
                 param.closeBtn ? $headerBtnClose.show() : $headerBtnClose.hide();
@@ -86,11 +109,11 @@ if (window.jQuery) {
             handlerOpen: function (param) {
                 var this_o = this;
 
-                var $main = $('.b-popup');
+                var $main = $('.b-lpopup');
 
                 // Навесим оброботчик отркытия на кнопки
-                var $btnsOpen = $('[data-popup]');
-                $btnsOpen.on('click.handlerOpenPopUp', function (e) {
+                var $btnsOpen = $('[data-lpopup]');
+                $btnsOpen.on('click.handlerOpenLPopUp', function (e) {
                     this_o.show(e, $main, param);
                 });
             },
@@ -105,17 +128,17 @@ if (window.jQuery) {
             handlerClose: function (openBtn, $main, param) {
                 var this_o = this;
 
-                var $btnsCloseOverflow = $main.find('.b-popup-overflow-close');
-                var $btnsHeaderClose = $main.find('.b-header__close');
-                var $btnsCancel = $main.find('.b-btns__cancel');
+                var $btnsCloseOverflow = $main.find('.b-lpopup-overflow-close');
+                var $btnsHeaderClose = $main.find('.b-lheader__close');
+                var $btnsCancel = $main.find('.b-lbtns__cancel');
 
-                $btnsCloseOverflow.on('click.handlerClosePopUp', function (e) {
+                $btnsCloseOverflow.on('click.handlerCloseLPopUp', function (e) {
                     this_o.close(e, openBtn, $main, param);
                 });
-                $btnsHeaderClose.on('click.handlerClosePopUp', function (e) {
+                $btnsHeaderClose.on('click.handlerCloseLPopUp', function (e) {
                     this_o.close(e, openBtn, $main, param);
                 });
-                $btnsCancel.on('click.handlerClosePopUp', function (e) {
+                $btnsCancel.on('click.handlerCloseLPopUp', function (e) {
                     this_o.close(e, openBtn, $main, param);
                 });
             },
@@ -130,7 +153,7 @@ if (window.jQuery) {
             handlerSave: function (openBtn, $main, param) {
                 var this_o = this;
 
-                var $btnsSave = $main.find('.b-btns__add');
+                var $btnsSave = $main.find('.b-lbtns__add');
                 $btnsSave.on('click.handlerSavePopUp', function (e) {
                     this_o.save(e, openBtn, $main, param);
                 });
@@ -142,16 +165,16 @@ if (window.jQuery) {
              * @param $main
              */
             handlersOff: function ($main) {
-                var $btnsCloseOverflow = $main.find('.b-popup-overflow-close');
-                var $btnsHeaderClose = $main.find('.b-header__close');
-                var $btnsCancel = $main.find('.b-btns__cancel');
+                var $btnsCloseOverflow = $main.find('.b-lpopup-overflow-close');
+                var $btnsHeaderClose = $main.find('.b-lheader__close');
+                var $btnsCancel = $main.find('.b-lbtns__cancel');
 
-                $btnsCloseOverflow.off('click.handlerClosePopUp');
-                $btnsHeaderClose.off('click.handlerClosePopUp');
-                $btnsCancel.off('click.handlerClosePopUp');
+                $btnsCloseOverflow.off('click.handlerCloseLPopUp');
+                $btnsHeaderClose.off('click.handlerCloseLPopUp');
+                $btnsCancel.off('click.handlerCloseLPopUp');
 
-                var $btnsSave = $main.find('.b-btns__add');
-                $btnsSave.off('click.handlerSavePopUp');
+                var $btnsSave = $main.find('.b-lbtns__add');
+                $btnsSave.off('click.handlerSaveLPopUp');
             },
 
             /**
@@ -166,8 +189,8 @@ if (window.jQuery) {
                 var self = $(e.target);
 
                 // Уберем оброботчик отркытия на кнопки
-                var $btnsOpen = $('[data-popup]');
-                $btnsOpen.off('click.handlerOpenPopUp');
+                var $btnsOpen = $('[data-lpopup]');
+                $btnsOpen.off('click.handlerOpenLPopUp');
 
                 this.handlerClose(self, $main, param);
 
@@ -250,12 +273,12 @@ if (window.jQuery) {
                 // актуальные настройки, будут индивидуальными при каждом запуске
                 options = $.extend({}, defaults, param);
 
-                // Добавим основной блок в DOM
-                // $('body').append('<div class="b-lNotify b-lNotify_' + options.position + '"></div>');
+                var lpopupTemplate = template.get();
 
+                // Добавим основной блок в DOM
+                $('body').append(lpopupTemplate);
 
                 popUp.init(options);
-
             }
         };
 
