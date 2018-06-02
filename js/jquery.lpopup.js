@@ -49,24 +49,77 @@ if (window.jQuery) {
         }
 
         var defaults = {
-                closeBtn: false,
-                target: '.show',
-                targetContent: '.content',
+                main: {
+                    target: '.show',
+                    targetContent: '.content',
+                    interface: {
+                        headerCloseBtn: true,
+                    }
+                },
+                callBacks: {
+                    // При открытии окна
+                    open: function(param) {
+                        /**
+                         * Возврощяемые значения в param
+                         *
+                         * @param: this_o, self, main
+                         * */
+
+                        console.log('--callbackOpen');
+                    },
+                    // При закрытии окна
+                    close: function(param) {
+                        /**
+                         * Возврощяемые значения в param
+                         *
+                         * @param: this_o, openBtn, main
+                         * */
+
+                        console.log('--callbackClose');
+                    },
+                    // При сохранении или добавлении
+                    save: function(param) {
+                        /**
+                         * Возврощяемые значения в param
+                         *
+                         * @param: this_o, openBtn, main
+                         * */
+
+                        console.log('--callbackClose');
+                    }
+                }
             },
             options;
 
+        // Public methods
+        var methods = {
+
+            init: function (param) {
+
+                // актуальные настройки, будут индивидуальными при каждом запуске
+                options = $.extend({}, defaults, param);
+
+                var popupTemplate = template.get(options.main);
+
+                // Добавим основной блок в DOM
+                $('body').append(popupTemplate);
+
+                popUp.init(options);
+            }
+        };
+
         var template = {
-            get: function (userBodyContentBlock) {
+            get: function (main) {
                 return "<!-- POPUP -->\n" +
-                        "<div class=\"b-lpopup\">\n" +
+                        "<div class=\"b-lpopup " + main.target + " \">\n" +
                             "<div class=\"b-lpopup-overflow-close\"></div>\n" +
                             "<div class=\"b-lpopup__content\">\n" +
                                 "<div class=\"b-lpopup__header\">\n" +
-                                    "<div class=\"b-lheader__title\">\n" +
+                                    "<div class=\"b-lheader__ltitle\">\n" +
                                         "<div class=\"b-ltitle__text\">Заголовок</div>\n" +
                                         "<div class=\"b-ltitle__sub-text\">Под заголовок</div>\n" +
                                     "</div>\n" +
-                                    "<div class=\"b-lheader__close\">X</div>\n" +
+                                    (main.interface.headerCloseBtn ? "<div class=\"b-lheader__close\">X</div>\n" : "") +
                                 "</div>\n" +
                                 "<div class=\"b-lpopup__body\">\n" +
                                     userBodyContentBlock +
@@ -263,22 +316,6 @@ if (window.jQuery) {
                 param.callbackSave(callBackParam);
 
                 this.handlerOpen(param);
-            }
-        };
-
-        // Public methods
-        var methods = {
-            init: function (param) {
-
-                // актуальные настройки, будут индивидуальными при каждом запуске
-                options = $.extend({}, defaults, param);
-
-                var lpopupTemplate = template.get();
-
-                // Добавим основной блок в DOM
-                $('body').append(lpopupTemplate);
-
-                popUp.init(options);
             }
         };
 

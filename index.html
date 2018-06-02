@@ -8,11 +8,14 @@
     <body>
 
         <a href="javascript:void(0);" class="show">Показать окно</a>
+        <a href="javascript:void(0);" class="show2">Показать окно2</a>
 
         <div class="content">
             Test COntet
         </div>
-
+        <div class="content2">
+            Test COntet2
+        </div>
 
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery.lpopup.js"></script>
@@ -20,50 +23,91 @@
             if (window.jQuery) {
                 $(function () {
 
-                    /**
-                     * Настройки и логика popup окна
-                     *
-                     * @type {{callbackOpen: callbackOpen, callbackClose: callbackClose, callbackSave: callbackSave}}
-                     */
                     var popUpParam = {
-                        closeBtn: false,
-                        target: '.show',
-                        targetContent: '.content',
-                        // При открытии окна
-                        callbackOpen: function(param) {
-                            /**
-                             * Возврощяемые значения в param
-                             *
-                             * @param: this_o, self, main
-                             * */
-
-                            console.log('--callbackOpen');
+                        main: {
+                            target: '.show',
+                            targetContent: '.content',
+                            interface: {
+                                headerCloseBtn: false,
+                            }
                         },
+                        callBacks: {
+                            // При открытии окна
+                            open: function(param) {
+                                /**
+                                 * Возврощяемые значения в param
+                                 *
+                                 * @param: this_o, self, main
+                                 * */
 
-                        // При закрытии окна
-                        callbackClose: function(param) {
-                            /**
-                             * Возврощяемые значения в param
-                             *
-                             * @param: this_o, openBtn, main
-                             * */
+                                console.log('--callbackOpen');
+                            },
+                            // При закрытии окна
+                            close: function(param) {
+                                /**
+                                 * Возврощяемые значения в param
+                                 *
+                                 * @param: this_o, openBtn, main
+                                 * */
 
-                            console.log('--callbackClose');
-                        },
+                                console.log('--callbackClose');
+                            },
+                            // При сохранении или добавлении
+                            save: function(param) {
+                                /**
+                                 * Возврощяемые значения в param
+                                 *
+                                 * @param: this_o, openBtn, main
+                                 * */
 
-                        // При сохранении или добавлении
-                        callbackSave: function(param) {
-                            /**
-                             * Возврощяемые значения в param
-                             *
-                             * @param: this_o, openBtn, main
-                             * */
-
-                            console.log('--callbackClose');
+                                console.log('--callbackClose');
+                            }
                         }
                     };
 
+                    var popUpParam2 = {
+                        main: {
+                            target: '.show2',
+                            targetContent: '.content2',
+                            interface: {
+                                headerCloseBtn: false,
+                            }
+                        },
+                        callBacks: {
+                            // При открытии окна
+                            open: function(param) {
+                                /**
+                                 * Возврощяемые значения в param
+                                 *
+                                 * @param: this_o, self, main
+                                 * */
+
+                                console.log('--callbackOpen');
+                            },
+                            // При закрытии окна
+                            close: function(param) {
+                                /**
+                                 * Возврощяемые значения в param
+                                 *
+                                 * @param: this_o, openBtn, main
+                                 * */
+
+                                console.log('--callbackClose');
+                            },
+                            // При сохранении или добавлении
+                            save: function(param) {
+                                /**
+                                 * Возврощяемые значения в param
+                                 *
+                                 * @param: this_o, openBtn, main
+                                 * */
+
+                                console.log('--callbackClose');
+                            }
+                        }
+                    };
                     $('.show').lPopup(popUpParam);
+                    $('.show2').lPopup(popUpParam2);
                 });
             } else {
                 console.log("--Подключите jQeury");
