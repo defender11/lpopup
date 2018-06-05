@@ -7,14 +7,19 @@
     </head>
     <body>
 
-        <a href="javascript:void(0);" class="show">Показать окно</a>
-        <a href="javascript:void(0);" class="show2">Показать окно2</a>
+        <a href="javascript:void(0);" data-lpopup class="add">Добавить</a>
+        <a href="javascript:void(0);" data-lpopup class="edit">Редактировать</a>
 
-        <div class="content">
-            Test COntet
+        <div class="add_content_wrapper">
+            <div class="add_content">
+                add content
+            </div>
         </div>
-        <div class="content2">
-            Test COntet2
+
+        <div class="edit_content_wrapper">
+            <div class="edit_content">
+                edit content
+            </div>
         </div>
 
         <script src="js/jquery.min.js"></script>
@@ -22,11 +27,11 @@
         <script>
             if (window.jQuery) {
                 $(function () {
-
                     var popUpParam = {
                         main: {
-                            target: '.show',
-                            targetContent: '.content',
+                            target: '.add',
+                            targetContent: '.add_content_wrapper',
+                            type: "inline",
                             interface: {
                                 headerCloseBtn: false,
                             }
@@ -67,8 +72,9 @@
 
                     var popUpParam2 = {
                         main: {
-                            target: '.show2',
-                            targetContent: '.content2',
+                            target: '.edit',
+                            targetContent: '.edit_content_wrapper',
+                            type: "inline",
                             interface: {
                                 headerCloseBtn: false,
                             }
@@ -106,8 +112,9 @@
                             }
                         }
                     };
-                    $('.show').lPopup(popUpParam);
-                    $('.show2').lPopup(popUpParam2);
+
+                    $.lPopup(popUpParam);
+                    $.lPopup(popUpParam2);
                 });
             } else {
                 console.log("--Подключите jQeury");

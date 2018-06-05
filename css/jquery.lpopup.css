@@ -1,90 +1,84 @@
 /* POPUP BLOCK CARCAS */
 .b-lpopup {
-    display: none;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.71);
-    z-index: 100;
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.71);
+  z-index: 100;
 }
-
-.b-lpopup .b-lpopup-overflow-close {
-    display: block;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.71);
-    z-index: 101;
+.b-lpopup-none {
+  display: none;
 }
-
-.b-lpopup .b-lpopup__content {
-    position: fixed;
-    width: 600px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 102;
+.b-lpopup-overflow-close {
+  display: block;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.71);
+  z-index: 101;
 }
-
-.b-lpopup .b-lpopup__content .b-lpopup__header,
-.b-lpopup .b-lpopup__content .b-lpopup__body,
-.b-lpopup .b-lpopup__content .b-lpopup__footer {
-    padding: 12px 19px;
+.b-lpopup__content {
+  position: fixed;
+  width: 600px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 102;
 }
-
-.b-lpopup .b-lpopup__content .b-lpopup__header {
-    font: normal 14px TahomaRegular, Tahoma, Arial, sans-serif;
-    line-height: 20px;
-    background: #2297F4;
-    color: #fff;
+.b-lpopup__content .b-lpopup__lheader,
+.b-lpopup__content .b-lpopup__lbody,
+.b-lpopup__content .b-lpopup__lfooter {
+  padding: 12px 19px;
 }
-.b-lpopup .b-lpopup__content .b-lpopup__header .b-lheader__ltitle {
-    font: normal 14px TahomaRegular, Tahoma, Arial, sans-serif;
-    line-height: 20px;
-    background: #2297F4;
-    color: #fff;
+.b-lpopup__content .b-lpopup__lheader {
+  font: normal 14px TahomaRegular, Tahoma, Arial, sans-serif;
+  line-height: 20px;
+  background: #2297F4;
+  color: #fff;
 }
-.b-lpopup .b-lpopup__content .b-lpopup__header .b-ltitle__text {
-    font: normal 14px TahomaRegular, Tahoma, Arial, sans-serif;
-    line-height: 20px;
-    background: #2297F4;
-    color: #fff;
+.b-lpopup__content .b-lpopup__lheader .b-lheader__ltitle {
+  font: normal 14px TahomaRegular, Tahoma, Arial, sans-serif;
+  line-height: 20px;
+  background: #2297F4;
+  color: #fff;
 }
-.b-lpopup .b-lpopup__content .b-lpopup__header .b-ltitle__sub-text {
-    font: normal 14px TahomaRegular, Tahoma, Arial, sans-serif;
-    line-height: 20px;
-    background: #2297F4;
-    color: #fff;
+.b-lpopup__content .b-lpopup__lheader .b-lheader__ltitle .b-ltitle__text {
+  font: normal 14px TahomaRegular, Tahoma, Arial, sans-serif;
+  line-height: 20px;
+  background: #2297F4;
+  color: #fff;
 }
-
-.b-lpopup .b-lpopup__content .b-lpopup__header .b-lheader__close {
-    display: block;
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    top: 15px;
-    right: 21px;
-    font: bold 14px TahomaBold, Tahoma, Arial, sans-serif;
-    line-height: 20px;
-    /*background: url(../img/close.png) center center no-repeat;*/
-    text-indent: -9999px;
-    cursor: pointer;
+.b-lpopup__content .b-lpopup__lheader .b-lheader__ltitle .b-ltitle__sub-text {
+  font: normal 14px TahomaRegular, Tahoma, Arial, sans-serif;
+  line-height: 20px;
+  background: #2297F4;
+  color: #fff;
 }
-
-.b-lpopup .b-lpopup__content .b-lpopup__body {
-    background: #fff;
+.b-lpopup__content .b-lpopup__lheader .b-lheader__close {
+  display: block;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 15px;
+  right: 21px;
+  font: bold 14px TahomaBold, Tahoma, Arial, sans-serif;
+  line-height: 20px;
+  /*background: url(../img/close.png) center center no-repeat;*/
+  text-indent: -9999px;
+  cursor: pointer;
 }
-
-.b-lpopup .b-lpopup__content .b-lpopup__footer {
-    background: #fff;
-    border-top: 1px solid #d0d1d2;
+.b-lpopup__content .b-lpopup__lbody {
+  background: #fff;
 }
-
-
+.b-lpopup__content .b-lpopup__lfooter {
+  background: #fff;
+  border-top: 1px solid #d0d1d2;
+}
 /*
 .b-lpopup__content .b-lpopup__footer .b-btns__add,
 .b-lpopup__content .b-lpopup__footer .b-btns__cancel {
@@ -139,3 +133,4 @@
     float: left;
 }
 */
+/*# sourceMappingURL=jquery.lpopup.css.map */
